@@ -44,21 +44,85 @@ canvas.create_rectangle(
     outline="")
 
 canvas.create_rectangle(
-    343.0,
-    23.0,
-    1061.0,
-    669.0,
+    340.0,
+    16.0,
+    1072.0,
+    674.0,
     fill="#272C30",
     outline="")
 
 canvas.create_text(
-    343.0,
-    23.0,
+    991.0,
+    231.0,
     anchor="nw",
-    text="Título\n",
+    text="preço",
     fill="#FFFFFF",
-    font=("Inter", 32 * -1)
+    font=("Inter", 20 * -1)
 )
+
+canvas.create_text(
+    991.0,
+    175.0,
+    anchor="nw",
+    text="preço",
+    fill="#FFFFFF",
+    font=("Inter", 20 * -1)
+)
+
+canvas.create_text(
+    810.0,
+    175.0,
+    anchor="nw",
+    text="Distribuidora\n",
+    fill="#FFFFFF",
+    font=("Inter", 20 * -1)
+)
+
+canvas.create_text(
+    779.0,
+    234.0,
+    anchor="nw",
+    text="Distribuidora\n",
+    fill="#FFFFFF",
+    font=("Inter", 20 * -1)
+)
+
+canvas.create_text(
+    501.0,
+    231.0,
+    anchor="nw",
+    text="tittle",
+    fill="#FFFFFF",
+    font=("Inter", 20 * -1)
+)
+
+canvas.create_text(
+    612.0,
+    175.0,
+    anchor="nw",
+    text="Desenvolvedor",
+    fill="#FFFFFF",
+    font=("Inter", 20 * -1)
+)
+
+canvas.create_text(
+    501.0,
+    175.0,
+    anchor="nw",
+    text="tittle",
+    fill="#FFFFFF",
+    font=("Inter", 20 * -1)
+)
+
+canvas.create_rectangle(
+    0.0,
+    25.0,
+    333.0,
+    81.0,
+    fill="#000000",
+    outline="")
+
+
 
 canvas.create_rectangle(
     0.0,
@@ -69,8 +133,8 @@ canvas.create_rectangle(
     outline="")
 
 canvas.create_text(
-    57.0,
-    99.0,
+    59.0,
+    209.0,
     anchor="nw",
     text="Distribuidora\n",
     fill="#FFFFFF",
@@ -78,8 +142,17 @@ canvas.create_text(
 )
 
 canvas.create_text(
-    44.0,
-    154.0,
+    46.0,
+    264.0,
+    anchor="nw",
+    text="Desenvolvedor",
+    fill="#FFFFFF",
+    font=("Inter", 20 * -1)
+)
+
+canvas.create_text(
+    581.0,
+    234.0,
     anchor="nw",
     text="Desenvolvedor",
     fill="#FFFFFF",
@@ -96,10 +169,68 @@ canvas.create_text(
 )
 
 canvas.create_text(
-    29.0,
-    211.0,
+    31.0,
+    321.0,
     anchor="nw",
     text="Melhores Jogos\n",
+    fill="#FFFFFF",
+    font=("Inter", 20 * -1)
+)
+
+x1, y1, x2, y2 = 535.0, 59.0, 877.0, 99.0
+
+# Crie um widget Entry no mesmo local que o retângulo original
+entry_widget = Entry(
+    window,
+    bg="#FFFFFF",  # Fundo branco
+    fg="#000000",  # Texto preto
+    font=("Inter", 20 * -1),  # Configurações da fonte
+    bd=0,  # Largura da borda
+    highlightthickness=0  # Sem destaque
+)
+
+# Crie o widget Entry no canvas
+entry_window = canvas.create_window(
+    (x1 + x2) / 2,   # Posição x média
+    (y1 + y2) / 2,    # Posição y média
+    width=x2 - x1,     # Largura
+    height=y2 - y1,    # Altura
+    window=entry_widget  # Widget Entry
+)
+
+
+
+canvas.create_rectangle(
+    377.0,
+    207.0,
+    470.0,
+    283.0,
+    fill="#000000",
+    outline="")
+
+# Crie um widget Button no mesmo local com o texto "Search"
+button_widget = Button(
+    window,
+    text="Search",   # Texto do botão
+    bg="#000000",    # Cor de fundo preta
+    fg="#FFFFFF",    # Cor do texto branco
+    font=("Inter", 20 * -1),  # Configurações da fonte
+    bd=0,            # Largura da borda
+    highlightthickness=0,  # Sem destaque
+)
+
+# Crie o widget Button no canvas
+button_window = canvas.create_window(
+    887.0,           # Posição x
+    67.0,            # Posição y
+    anchor="nw",     # Ancoragem no canto superior esquerdo
+    window=button_widget  # Widget Button
+)
+canvas.create_text(
+    377.0,
+    175.0,
+    anchor="nw",
+    text="Banner",
     fill="#FFFFFF",
     font=("Inter", 20 * -1)
 )

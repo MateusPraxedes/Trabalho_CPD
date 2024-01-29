@@ -4,7 +4,7 @@ import tkinter
     
 def main():
     
-    le_dados()
+    #le_dados()
     
     window = inicializa_interface()
     

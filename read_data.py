@@ -2,6 +2,9 @@ import pandas as pd
 import pickle
 from pathlib import Path
 import csv 
+import os
+
+caminho_arquivos = os.path.join(os.environ['USERPROFILE'],'Desktop')
 
 # Testa se já existe um arquivo com os dados em binário, caso não exista lê o arquivo csv original e escreve esses dados 
 def le_dados():
@@ -10,7 +13,7 @@ def le_dados():
         
     if not path_dados_bin.is_file():
         dados = []
-        with open(f"{caminho_projeto.absolute()}\\csv\\steam_data.csv",'r',encoding='utf-8') as arquivo:
+        with open(f"{caminho_arquivos}\\csv\\steam_data.csv",'r',encoding='utf-8') as arquivo:
             reader = csv.reader(arquivo)
             headers = next(reader)
             print(headers)

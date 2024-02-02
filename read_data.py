@@ -4,6 +4,10 @@ from pathlib import Path
 
 # Testa se já existe um arquivo com os dados em binário, caso não exista lê o arquivo csv original e escreve esses dados 
 def le_dados():
+    
+    caminho_projeto = Path() 
+    print(caminho_projeto)
+    
     path_dados_bin =  Path('C:\\Users\\verti\\Desktop\\GitHub\\Trabalho_CPD\\bin\\steam_data_bin.bin')
    
     if path_dados_bin.is_dir():

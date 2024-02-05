@@ -7,10 +7,12 @@ from prettytable import PrettyTable
 
 caminho_arquivos = os.path.join(os.environ['USERPROFILE'],'Desktop')
 
+print(caminho_arquivos)
+
 # Testa se já existe um arquivo com os dados em binário, caso não exista lê o arquivo csv original e escreve esses dados 
 def le_dados():
     caminho_projeto = Path()    
-    path_dados_bin =  Path(f"{caminho_projeto.absolute()}\\bin\\steam_data_bin.bin")
+    path_dados_bin = Path(f"{caminho_projeto.absolute()}\\bin\\steam_data_bin.bin")
     
     #Lê csv completo
     df = pd.read_csv(f"{caminho_arquivos}\\csv\\steam_data.csv")

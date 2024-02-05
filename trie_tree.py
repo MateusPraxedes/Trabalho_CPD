@@ -1,48 +1,48 @@
-#Função de contrução de uma árvore Trie para injeção dos dados do arquivo .bin gerado a partir do arquivo .csv em read_data.py
+#Função de contrução de uma árvore Trie
+import os
+import pickle
 
 class TrieNode:
     def __init__(self):
-        self.children = [None] * 256  # 256 possible characters for binary data
-        self.isEndOfWord = False
-
+        self.children = {}
+        self.is_end_of_word = False
+        self.index = None
 
 class Trie:
     def __init__(self):
-        self.root = self.getNode()
+        self.root = TrieNode()
 
-    def getNode(self):
-        return TrieNode()
+    def insert(self, word, index):
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                node.children[char] = TrieNode()
+            node = node.children[char]
+        node.is_end_of_word = True
+        node.index = index
 
-    def _charToIndex(self, ch):
-        return ch
+    def search(self, word):
+        node = self.root
+        for char in word:
+            if char not in node.children:
+                return False, None
+            node = node.children[char]
+        return node.is_end_of_word, node.index
 
-    def insert(self, key):
-        pCrawl = self.root
-        length = len(key)
-        for level in range(length):
-            index = self._charToIndex(key[level])
+def build_trie_from_binary_file(file_path):
+    trie = Trie()
+    with open(file_path, 'rb') as binary_file:
+        index = 0
+        while True:
+            try:
+                data = pickle.load(binary_file)
+                if isinstance(data, tuple) and len(data) == 2:
+                    word, link = data
+                    trie.insert(word, index)
+                    index += 1
+            except EOFError:
+                break
+    return trie
 
-            if not pCrawl.children[index]:
-                pCrawl.children[index] = self.getNode()
-            pCrawl = pCrawl.children[index]
-
-        pCrawl.isEndOfWord = True
-
-    def search(self, key):
-        pCrawl = self.root
-        length = len(key)
-        for level in range(length):
-            index = self._charToIndex(key[level])
-            if not pCrawl.children[index]:
-                return False
-            pCrawl = pCrawl.children[index]
-
-        return pCrawl.isEndOfWord
-
-
-def read_binary_file(file_path):
-    with open(file_path, 'rb') as file:
-        data = file.read()
-    return data
 
 

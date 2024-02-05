@@ -29,6 +29,17 @@ class Trie:
             node = node.children[char]
         return node.is_end_of_word, node.index
 
+    def save_to_file(self, file_path):
+        with open(file_path, 'wb') as binary_file:
+            pickle.dump(self.root, binary_file)
+
+    @classmethod
+    def load_from_file(cls, file_path):
+        trie = cls()
+        with open(file_path, 'rb') as binary_file:
+            trie.root = pickle.load(binary_file)
+        return trie
+
 def build_trie_from_binary_file(file_path):
     trie = Trie()
     with open(file_path, 'rb') as binary_file:

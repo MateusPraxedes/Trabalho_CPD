@@ -2,7 +2,6 @@ import pickle
 from trie_tree import save_to_file
 from trie_tree import load_from_file
 
-
 def add_word(trie, word):
     # Adiciona uma nova palavra à trie
     index = len(trie.root.children)
@@ -54,3 +53,23 @@ def remove_word(trie, word):
 
     save_to_file()
     return
+
+#Implementar na interface
+def buscar_e_mostrar_resultados(trie, termo_busca, ordenacao, pagina, registros_por_pagina):
+    # Realiza a busca na Trie
+    indices_resultado = trie.search(termo_busca)
+
+    # Ordena os resultados conforme especificado
+    if ordenacao == 'crescente':
+        indices_resultado = sorted(indices_resultado)
+    elif ordenacao == 'decrescente':
+        indices_resultado = sorted(indices_resultado, reverse=True)
+
+    # Aplica a paginacao
+    inicio = (pagina - 1) * registros_por_pagina
+    fim = inicio + registros_por_pagina
+    resultados_paginados = indices_resultado[inicio:fim]
+
+    # Exibe os resultados paginados
+    for indice in resultados_paginados:
+        print(f"Registro {indice}: {registros[indice]}")

@@ -1,12 +1,12 @@
-from frames.interface import inicializa_interface
+from frames.interface import Interface
 from read_data import le_dados
-from trie_tree import build_trie_from_binary_file, Trie
+from trie_tree import Trie
 import os
 
 def main():
     
     jogos_lidos = le_dados()
-    print(jogos_lidos)
+    
 
 #Constrói a árvore Trie a partir dos dados contidos na variável jogos_lidos
     bin_directory = os.path.join(os.path.dirname(__file__), 'bin')
@@ -16,9 +16,9 @@ def main():
     if os.path.exists(trie_file_path):
         trie = Trie.load_from_file(trie_file_path)
     else:
-        trie = build_trie_from_binary_file(file_path)
+        trie = Trie.build_trie_from_binary_file(file_path)
 
-    window = inicializa_interface(jogos_lidos)
+    window = Interface()
     
     window.mainloop()
 

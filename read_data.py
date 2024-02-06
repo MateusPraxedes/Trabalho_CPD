@@ -7,7 +7,6 @@ from prettytable import PrettyTable
 
 caminho_arquivos = os.path.join(os.environ['USERPROFILE'],'Desktop')
 
-print(caminho_arquivos)
 
 # Testa se já existe um arquivo com os dados em binário, caso não exista lê o arquivo csv original e escreve esses dados 
 def le_dados():
@@ -28,4 +27,9 @@ def le_dados():
         with open(path_dados_bin,'wb') as arquivo_bin:
             pickle.dump(df,arquivo_bin)
 
+    with open(path_dados_bin,'rb') as arquivo_bin:
+        arquivo_bin.seek(0)
+        df = pickle.load(arquivo_bin)
+        return df
     
+

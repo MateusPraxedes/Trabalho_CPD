@@ -78,6 +78,7 @@ class Funcoes():
         for index, row in dados.iterrows():
             self.table_jogos_buscados.insert('', 'end', values=(row['name'], row['url'], row['categories'], row['img_url'], row['user_reviews'], row['date'], row['developer'], row['publisher'], row['price']))
 
+
 class Interface(Funcoes):
     def __init__(self):
         self.root = root

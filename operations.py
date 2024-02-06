@@ -72,4 +72,4 @@ def buscar_e_mostrar_resultados(trie, termo_busca, ordenacao, pagina, registros_
 
     # Exibe os resultados paginados
     for indice in resultados_paginados:
-        print(f"Registro {indice}: {registros[indice]}")
+        print(f"Registro {indice}: {registx xros[indice]}")

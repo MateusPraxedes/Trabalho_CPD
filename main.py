@@ -1,7 +1,8 @@
 from frames.interface import inicializa_interface
 from read_data import le_dados
-from trie_tree import build_trie_from_binary_file
-    
+from trie_tree import build_trie_from_binary_file, Trie
+import os
+
 def main():
     
     jogos_lidos = le_dados()

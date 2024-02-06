@@ -4,6 +4,7 @@ from action_botoes.action_distribuidoras import printa as distribuidoras
 from action_botoes.action_best_games import printa as  best_games
 from action_botoes.action_precos import printa  as precos
 
+    
 def inicializa_interface(jogos_lidos):
     # Cria janela do app
     window = tk.Tk()
@@ -26,6 +27,7 @@ def inicializa_interface(jogos_lidos):
     # Cria um topbar no topo da janela
     topbar_frame = tk.Frame(window,bg="#272C30",height=60)
     topbar_frame.pack(side="top", fill="x")
+    
     # Adiciona título
     title_label = tk.Label(sidebar_frame, text="Steam Games", bg="#272C30", fg="white", font=("Helvetica", 16, "bold"))
     title_label.place(x=10, y=10)
@@ -53,8 +55,6 @@ def inicializa_interface(jogos_lidos):
     data_space = tk.Frame(window, width=main_space_width, height=main_space_height, bg="#4e5860")
     data_space.pack(side="right", fill="both")
 
-    card_jogos = tk.Canvas(data_space, width=400, height=200, bg="#a823bc", relief="solid", bd=1, highlightthickness=0)
-    card_jogos.place(relx=0.5, rely=0.5, anchor="center")
-    card_jogos.create_text(200, 100, text=f"Número de jogos lidos: {jogos_lidos}", font=("Helvetica", 16, "bold"), fill="white")
     
     return window
+

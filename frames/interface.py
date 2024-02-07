@@ -3,6 +3,7 @@ from tkinter import ttk
 from read_data import le_dados
 from pathlib import Path
 import pickle
+import pandas as pd
 
 root = Tk()
 
@@ -318,6 +319,19 @@ class Interface(Funcoes):
         self.scrollTableMelhoresJogos.place(relx = 0.96, rely =0.1,relwidth=0.04, relheight = 0.985)
     
     def dados_aba_todos(self):  
+         # Crie um Frame para conter os botões
+        self.button_frame = Frame(self.aba_todos)
+        self.button_frame.pack(fill=X)
+        
+        # Crie os botões e posicione-os no Frame
+        self.button1 = Button(self.button_frame, text="Ordenar por Nome", command=self.mostrar_dados_1)
+        self.button1.pack(side=LEFT, fill=X, expand=True)
+        self.button2 = Button(self.button_frame, text="Ordenar por Categoria", command=self.mostrar_dados_2)
+        self.button2.pack(side=LEFT, fill=X, expand=True)
+        self.button3 = Button(self.button_frame, text="Ordenar por Desenvolvedora", command=self.mostrar_dados_3)
+        self.button3.pack(side=LEFT, fill=X, expand=True)
+        self.button4 = Button(self.button_frame, text="Mostrar Dados sem Ordenação", command=self.dados_jogos)
+        self.button4.pack(side=LEFT, fill=X, expand=True)
         self.table_todos_jogos = ttk.Treeview(self.aba_todos,height=10,columns=("col1","col2","col3","col4","col5","col6","col7","col8","col9"))
         
         self.table_todos_jogos.column("#0", width=0,stretch=NO)
@@ -347,11 +361,113 @@ class Interface(Funcoes):
         self.table_todos_jogos.configure(yscroll=self.scrollTableTodos.set)
         self.scrollTableTodos.place(relx = 0.96, rely =0.1,relwidth=0.04, relheight = 0.985)
 
-        self.dados_jogos()
+       
         
+    def mostrar_dados_1(self):
+        
+        self.table_todos_jogos.delete(*self.table_todos_jogos.get_children())
+        # Obtenha os dados e insira-os na tabela
+        df = le_dados()
+        
+        # Convertendo o DataFrame para uma lista de tuplas
+        tuple_list = [tuple(x) for x in df.to_numpy()]
+
+        col_index = 1
+
+        # Ordenando a lista de tuplas usando merge sort
+        merge_sort(tuple_list, col_index)
+
+        # Convertendo a lista de tuplas ordenada de volta para um DataFrame
+        sorted_df = pd.DataFrame(tuple_list, columns=df.columns)
+       
+        for index, row in sorted_df.iterrows():
+            self.table_todos_jogos.insert('','end', values=(row['url'],row['name'],row['categories'],row['img_url'],row['user_reviews'],row['date'],row['developer'],row['publisher'],row['price']))
+        
+    
+
+    def mostrar_dados_2(self):
+        
+        self.table_todos_jogos.delete(*self.table_todos_jogos.get_children())
+        # Obtenha os dados e insira-os na tabela
+        df = le_dados()
+        # Convertendo o DataFrame para uma lista de tuplas
+        tuple_list = [tuple(x) for x in df.to_numpy()]
+
+        col_index = 2
+
+        # Ordenando a lista de tuplas usando merge sort
+        merge_sort(tuple_list, col_index)
+
+        # Convertendo a lista de tuplas ordenada de volta para um DataFrame
+        sorted_df = pd.DataFrame(tuple_list, columns=df.columns)
+       
+        for index, row in sorted_df.iterrows():
+            self.table_todos_jogos.insert('','end', values=(row['url'],row['name'],row['categories'],row['img_url'],row['user_reviews'],row['date'],row['developer'],row['publisher'],row['price']))
+        
+    
+
+    def mostrar_dados_3(self):
+        
+        self.table_todos_jogos.delete(*self.table_todos_jogos.get_children())
+        df = le_dados()
+        # Convertendo o DataFrame para uma lista de tuplas
+        tuple_list = [tuple(x) for x in df.to_numpy()]
+
+        col_index = 6
+
+        # Ordenando a lista de tuplas usando merge sort
+        merge_sort(tuple_list, col_index)
+
+        # Convertendo a lista de tuplas ordenada de volta para um DataFrame
+        sorted_df = pd.DataFrame(tuple_list, columns=df.columns)
+       
+        for index, row in sorted_df.iterrows():
+            self.table_todos_jogos.insert('','end', values=(row['url'],row['name'],row['categories'],row['img_url'],row['user_reviews'],row['date'],row['developer'],row['publisher'],row['price']))
+        
+    
+        
+    
     def dados_jogos(self):
+        
+        self.table_todos_jogos.delete(*self.table_todos_jogos.get_children())
         dados = le_dados()
         for index, row in dados.iterrows():
             self.table_todos_jogos.insert('','end', values=(row['url'],row['name'],row['categories'],row['img_url'],row['user_reviews'],row['date'],row['developer'],row['publisher'],row['price']))
-            
     
+# Função para merge sort
+def merge_sort(arr, col_index):
+     if len(arr) > 1:
+        mid = len(arr) // 2
+        left_half = arr[:mid]
+        right_half = arr[mid:]
+
+        merge_sort(left_half, col_index)
+        merge_sort(right_half, col_index)
+
+        i = j = k = 0
+
+        while i < len(left_half) and j < len(right_half):
+            if type(left_half[i][col_index]) == type(right_half[j][col_index]):
+                if left_half[i][col_index] < right_half[j][col_index]:
+                    arr[k] = left_half[i]
+                    i += 1
+                else:
+                    arr[k] = right_half[j]
+                    j += 1
+            elif isinstance(left_half[i][col_index], str) and isinstance(right_half[j][col_index], (int, float)):
+                arr[k] = left_half[i]
+                i += 1
+            else:
+                arr[k] = right_half[j]
+                j += 1
+            k += 1
+
+        while i < len(left_half):
+            arr[k] = left_half[i]
+            i += 1
+            k += 1
+
+        while j < len(right_half):
+            arr[k] = right_half[j]
+            j += 1
+            k += 1
